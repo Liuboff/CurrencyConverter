@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { CurrencyService } from '../../shared/services/currency.service';
+import { Rates } from '../../shared/models/RateResponse.model';
 
 @Component({
   selector: 'app-converter',
@@ -15,8 +16,7 @@ export class ConverterComponent implements OnInit {
   constructor(private currencyService: CurrencyService) {}
 
   currencies: string[] = ['UAH', 'EUR', 'USD', 'CAD'];
-
-  rates: { [key: string]: number } = {};
+  rates: Rates = {};
 
   fromAmount: number = 0;
   fromCurrency: string = this.currencies[0];
@@ -25,8 +25,8 @@ export class ConverterComponent implements OnInit {
   toCurrency: string = this.currencies[2];
 
   ngOnInit(): void {
-    this.currencyService.getExchangeRates(this.fromCurrency).subscribe((response) => {
-        this.rates = response.rates;
+    this.currencyService.getExchangeRates(this.fromCurrency).subscribe(res => {
+      this.rates = res.rates
     });
 
     this.convertFrom();
@@ -41,9 +41,7 @@ export class ConverterComponent implements OnInit {
   }
 
   onToAmountChange() {
-    if (this.fromCurrency && this.toCurrency) {
-      this.fromAmount = +((this.toAmount * this.rates[this.fromCurrency]) / this.rates[this.toCurrency]).toFixed(2);
-    }
+    this.convertTo();
   }
 
   onToCurrencyChange() {
@@ -52,7 +50,15 @@ export class ConverterComponent implements OnInit {
 
   convertFrom() {
     if (this.fromCurrency && this.toCurrency) {
-      this.toAmount = (this.fromAmount * this.rates[this.toCurrency]) / this.rates[this.fromCurrency];
+      this.toAmount = this.currencyService
+      .convert(this.fromCurrency, this.toCurrency, this.fromAmount, this.toAmount, this.rates);
+    }
+  }
+
+  convertTo() {
+    if (this.fromCurrency && this.toCurrency) {
+      this.fromAmount = this.currencyService
+        .convert(this.toCurrency, this.fromCurrency, this.toAmount, this.fromAmount, this.rates);
     }
   }
 }

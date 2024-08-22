@@ -5,5 +5,9 @@ export interface RateResponse {
   "base": string,
   "date": string,
   "time_last_updated": number,
-  "rates": {[key: string]: number}
+  "rates": Rates
+}
+
+export interface Rates {
+  [key: string]: number
 }
