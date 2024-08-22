@@ -1,0 +1,46 @@
+.converter {
+  margin: 30px;
+  caret-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__title {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  &__block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+    height: 400px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 5px lightgrey;
+
+  }
+
+  &__item {
+    margin-bottom: 40px;
+
+    input, select {
+      padding: 7px;
+      outline: none;
+      border-radius: 3px;
+      border: 1px solid lightgrey;
+      color: #292727;
+      font-size: 16px;
+      caret-color: grey;
+    }
+
+    select {
+      color: #ae2b2b;
+      font-weight: 600;
+    }
+
+  }
+
+}
+

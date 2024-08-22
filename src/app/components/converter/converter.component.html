@@ -1,0 +1,28 @@
+<div class="converter">
+  <h2 class="converter__title">Adjust the exchange:</h2>
+
+  <div class="converter__block">
+    <div class="converter__item">
+      <h3>Convertation from:</h3>
+      <input type="number" [(ngModel)]="fromAmount" (input)="onFromAmountChange()" min="0" />
+      <select [(ngModel)]="fromCurrency" (change)="onFromCurrencyChange()" >
+        <!-- <option value="" disabled>Choose a currency</option> -->
+        <option *ngFor="let currency of currencies" [value]="currency">{{ currency }}</option>
+      </select>
+    </div>
+
+    <div class="converter__item">
+      <h3>Result:</h3>
+      <input type="number" [(ngModel)]="toAmount" (input)="onToAmountChange()" min="0" />
+      <select [(ngModel)]="toCurrency" (change)="onToCurrencyChange()">
+        <!-- <option value="" disabled>Choose a currency</option> -->
+        <option *ngFor="let currency of currencies" [value]="currency">{{ currency }}</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- <div *ngIf="errorMessage" style="color: red;">
+    {{ errorMessage }}
+  </div> -->
+
+</div>
