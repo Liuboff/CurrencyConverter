@@ -24,9 +24,19 @@ export class ConverterComponent implements OnInit {
   toAmount: number = 0;
   toCurrency: string = this.currencies[2];
 
+  errorMessage: string | null = null;
+
   ngOnInit(): void {
-    this.currencyService.getExchangeRates(this.fromCurrency).subscribe(res => {
-      this.rates = res.rates
+    this.currencyService.getExchangeRates(this.fromCurrency).subscribe({
+      next: (res) => {
+        this.rates = res.rates;
+        this.convertFrom();
+        this.errorMessage = null;
+      },
+      error: (err) => {
+        this.errorMessage = err.message;
+        this.rates = {};
+      },
     });
 
     this.convertFrom();
