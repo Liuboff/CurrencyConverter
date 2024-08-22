@@ -10,6 +10,4 @@ import { ConverterComponent } from "./components/converter/converter.component";
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
-  title = 'CurrencyConverter';
-}
+export class AppComponent {}

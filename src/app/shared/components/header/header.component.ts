@@ -1,9 +1,10 @@
-import { CurrencyService } from './../../services/currency.service';
 import { Component } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 import { registerLocaleData } from '@angular/common';
 import localeUk from '@angular/common/locales/uk';
 registerLocaleData(localeUk, 'uk');
+
+import { CurrencyService } from './../../services/currency.service';
 
 @Component({
   selector: 'app-header',
@@ -20,8 +21,8 @@ export class HeaderComponent {
 
   ngOnInit() {
     this.currencyService.getExchangeRates('UAH').subscribe(res => {
-      this.USD = this.currencyService.convert('USD', 'UAH', 1, this.USD, res.rates);
-      this.EUR = this.currencyService.convert('EUR', 'UAH', 1, this.EUR, res.rates);
+      this.USD = this.currencyService.convert('USD', 'UAH', 1, res.rates);
+      this.EUR = this.currencyService.convert('EUR', 'UAH', 1, res.rates);
     });
   }
 }

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { catchError, Observable, throwError } from 'rxjs';
 
 import { RateResponse, Rates } from "../../shared/models/RateResponse.model";
-import { catchError, Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +18,8 @@ export class CurrencyService {
     );
   }
 
-  convert(fromCurrency: string, toCurrency: string, fromAmount: number, toAmount: number, rates: Rates) {
-    return toAmount = +((fromAmount * rates[toCurrency]) / rates[fromCurrency]).toFixed(2);
+  convert(fromCurrency: string, toCurrency: string, fromAmount: number, rates: Rates) {
+    return +((fromAmount * rates[toCurrency]) / rates[fromCurrency]).toFixed(2);
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
